@@ -1,3 +1,7 @@
 [submodule "permissioning-smart-contracts"]
 	path = contracts/permissioning-smart-contracts
 	url = https://github.com/Consensys/permissioning-smart-contracts.git
+
+[submodule "sirato-free"]
+	path = explorer/sirato-free
+	url = https://github.com/web3labs/sirato-free
