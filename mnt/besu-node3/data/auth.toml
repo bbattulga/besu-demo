@@ -1,0 +1,4 @@
+[Users.bbattulga]
+password = "$2a$10$69b/FftGgKlLcxriIfVQ4u8ah7qYAKFS7AAe9O7pHofvZmx6qgcgq"
+permissions=["*:*"]
+privacyPublicKey="U7ANiOOd5L9Z/dMxRFjdbhA1Qragw6fLuYgmgCvLoX4="

@@ -1,0 +1,128 @@
+version: '3'
+
+services:
+  # docker run -p <localportJSON-RPC>:8545 -p <localportWS>:8546 -p <localportP2P>:30303 hyperledger/besu:latest --rpc-http-enabled --rpc-ws-enabled
+  besu-node1:
+    container_name: besu-node1
+    image: hyperledger/besu:latest
+    environment:
+      - BESU_RPC_HTTP_ENABLED=true
+      - BESU_GRAPHQL_HTTP_ENABLED=true
+      - BESU_RPC_HTTP_API=ETH,QBFT,NET,ADMIN,PERM,NET,ADMIN,PERM,PRIV,EEA,NET,ADMIN,PERM
+      - BESU_RPC_HTTP_AUTHENTICATION_ENABLED=false
+      - BESU_RPC_HTTP_AUTHENTICATION_CREDENTIALS_FILE=/mnt/besu-node1/data/auth.toml
+      - BESU_RPC_WS_ENABLED=true
+      - BESU_NETWORK=DEV
+      - BESU_DATA_PATH=/mnt/besu-node1/data
+      - BESU_MIN_GAS_PRICE=0
+      - BESU_GENESIS_FILE=/mnt/besu-node1/genesis.json
+      - BESU_PERMISSIONS_NODES_CONFIG_FILE_ENABLED=true
+      - BESU_XDNS_ENABLED=true
+      - BESU_XDNS_UPDATE_ENABLED=true
+      - BESU_HOST_ALLOWLIST=*
+      - BESU_GRAPHQL_HTTP_CORS_ORIGINS=*
+      - BESU_RANDOM_PEER_PRIORITY_ENABLED=true
+      - BESU_BOOTNODES=enode://538dee4b7e75d2872dbf7193dd75a4054ab612b8ee89237a520123976531d22db69d91b41d16bed95a122417a4c070270464dcf69f38e0f63c7b514f87f1bbf4@besu-node1:30303
+    volumes:
+      - type: bind
+        source: ./mnt/besu-node1
+        target: /mnt/besu-node1
+    networks:
+      - besu-test
+    ports:
+      - 20000:8545
+      - 8547:8547
+      - 8546:8546
+      - 30303:30303
+  besu-node2:
+    container_name: besu-node2
+    image: hyperledger/besu:latest
+    environment:
+      - BESU_RPC_HTTP_ENABLED=true
+      - BESU_GRAPHQL_HTTP_ENABLED=true
+      - BESU_RPC_HTTP_API=ETH,QBFT,NET,ADMIN,PERM,NET,ADMIN,PERM,PRIV,EEA
+      - BESU_RPC_HTTP_AUTHENTICATION_ENABLED=false
+      - BESU_RPC_HTTP_AUTHENTICATION_CREDENTIALS_FILE=/mnt/besu-node2/data/auth.toml
+      - BESU_RPC_WS_ENABLED=true
+      - BESU_NETWORK=DEV
+      - BESU_DATA_PATH=/mnt/besu-node2/data
+      - BESU_MIN_GAS_PRICE=0
+      - BESU_GENESIS_FILE=/mnt/besu-node2/genesis.json
+      - BESU_BOOTNODES=enode://538dee4b7e75d2872dbf7193dd75a4054ab612b8ee89237a520123976531d22db69d91b41d16bed95a122417a4c070270464dcf69f38e0f63c7b514f87f1bbf4@besu-node1:30303
+      - BESU_P2P_PORT=30304
+      - BESU_XDNS_ENABLED=true
+      - BESU_XDNS_UPDATE_ENABLED=true
+      - BESU_PERMISSIONS_NODES_CONFIG_FILE_ENABLED=true
+      - BESU_RANDOM_PEER_PRIORITY_ENABLED=true
+      - BESU_HOST_ALLOWLIST=*
+      - BESU_GRAPHQL_HTTP_CORS_ORIGINS=*
+    volumes:
+      - type: bind
+        source: ./mnt/besu-node2
+        target: /mnt/besu-node2
+    networks:
+      - besu-test
+    ports:
+      - 30304:30304
+      - 20001:8545
+  besu-node3:
+    container_name: besu-node3
+    image: hyperledger/besu:latest
+    environment:
+      - BESU_RPC_HTTP_ENABLED=true
+      - BESU_GRAPHQL_HTTP_ENABLED=true
+      - BESU_RPC_HTTP_API=ETH,QBFT,NET,ADMIN,PERM,NET,ADMIN,PERM,PRIV,EEA
+      - BESU_RPC_HTTP_AUTHENTICATION_ENABLED=false
+      - BESU_RPC_HTTP_AUTHENTICATION_CREDENTIALS_FILE=/mnt/besu-node3/data/auth.toml
+      - BESU_RPC_WS_ENABLED=true
+      - BESU_NETWORK=DEV
+      - BESU_DATA_PATH=/mnt/besu-node3/data
+      - BESU_MIN_GAS_PRICE=0
+      - BESU_GENESIS_FILE=/mnt/besu-node3/genesis.json
+      - BESU_BOOTNODES=enode://538dee4b7e75d2872dbf7193dd75a4054ab612b8ee89237a520123976531d22db69d91b41d16bed95a122417a4c070270464dcf69f38e0f63c7b514f87f1bbf4@besu-node1:30303
+      - BESU_P2P_PORT=30305
+      - BESU_XDNS_ENABLED=true
+      - BESU_XDNS_UPDATE_ENABLED=true
+      - BESU_PERMISSIONS_NODES_CONFIG_FILE_ENABLED=true
+      - BESU_RANDOM_PEER_PRIORITY_ENABLED=true
+    volumes:
+      - type: bind
+        source: ./mnt/besu-node3
+        target: /mnt/besu-node3
+    networks:
+      - besu-test
+    ports:
+      - 30305:30305
+      - 20002:8545
+  besu-node4:
+    container_name: besu-node4
+    image: hyperledger/besu:latest
+    environment:
+      - BESU_RPC_HTTP_ENABLED=true
+      - BESU_GRAPHQL_HTTP_ENABLED=true
+      - BESU_RPC_HTTP_API=ETH,QBFT,NET,ADMIN,PERM,NET,ADMIN,PERM,PRIV,EEA
+      - BESU_RPC_HTTP_AUTHENTICATION_ENABLED=false
+      - BESU_RPC_HTTP_AUTHENTICATION_CREDENTIALS_FILE=/mnt/besu-node4/data/auth.toml
+      - BESU_RPC_WS_ENABLED=true
+      - BESU_NETWORK=DEV
+      - BESU_DATA_PATH=/mnt/besu-node4/data
+      - BESU_MIN_GAS_PRICE=0
+      - BESU_GENESIS_FILE=/mnt/besu-node4/genesis.json
+      - BESU_BOOTNODES=enode://538dee4b7e75d2872dbf7193dd75a4054ab612b8ee89237a520123976531d22db69d91b41d16bed95a122417a4c070270464dcf69f38e0f63c7b514f87f1bbf4@besu-node1:30303
+      - BESU_P2P_PORT=30306
+      - BESU_XDNS_ENABLED=true
+      - BESU_XDNS_UPDATE_ENABLED=true
+      - BESU_PERMISSIONS_NODES_CONFIG_FILE_ENABLED=true
+      - BESU_RANDOM_PEER_PRIORITY_ENABLED=true
+    volumes:
+      - type: bind
+        source: ./mnt/besu-node4
+        target: /mnt/besu-node4
+    networks:
+      - besu-test
+    ports:
+      - 30306:30306
+      - 20003:8545
+
+networks:
+  besu-test:
