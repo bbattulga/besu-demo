@@ -1,0 +1,3 @@
+[submodule "permissioning-smart-contracts"]
+	path = contracts/permissioning-smart-contracts
+	url = https://github.com/Consensys/permissioning-smart-contracts.git
