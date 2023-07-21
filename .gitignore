@@ -123,3 +123,6 @@ junit.xml
 mnt/*/data/caches
 mnt/*/data/database
 mnt/*/data/DATABASE_METADATA.json
+
+besu.ports
+besu.networks
